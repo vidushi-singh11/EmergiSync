@@ -14,13 +14,13 @@ import { getFirestore } from "firebase/firestore";
 // };
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBUnjaCiJDbx0Dat1GE20Ytcz-CsFJDV_g",
-    authDomain: "emergisync.firebaseapp.com",
-    projectId: "emergisync",
-    storageBucket: "emergisync.firebasestorage.app",
-    messagingSenderId: "914078246074",
-    appId: "1:914078246074:web:6c6a9bba3f411533c98e83",
-    measurementId: "G-8081T8DR8M"
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
