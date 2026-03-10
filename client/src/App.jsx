@@ -8,6 +8,7 @@ import RoleSelection from './pages/RoleSelection';
 import DriverDashboard from './pages/DriverDashboard';
 import ControlRoomDashboard from './pages/ControlRoomDashboard';
 import HospitalDashboard from './pages/HospitalDashboard';
+import LearnMore from './pages/LearnMore';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Landingpage />} />
+          <Route path="/learn-more" element={<LearnMore />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/role-selection" element={<RoleSelection />} />
