@@ -1,8 +1,34 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, Crosshair, Bell, PlusSquare, MapPin, Route, TrafficCone, Shield, Users, Server, Database, Monitor, AlertCircle, CheckCircle } from 'lucide-react';
+import { auth, db } from '../firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
 
 const Landingpage = () => {
+    const navigate = useNavigate();
+
+    React.useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                try {
+                    const userDocRef = doc(db, 'users', user.uid);
+                    const userDoc = await getDoc(userDocRef);
+
+                    if (userDoc.exists() && userDoc.data().role) {
+                        const role = userDoc.data().role;
+                        if (role === 'ambulance') navigate('/driver-dashboard');
+                        else if (role === 'controlRoom') navigate('/control-room');
+                        else if (role === 'hospital') navigate('/hospital-dashboard');
+                    }
+                } catch (err) {
+                    console.error("Error fetching user role for redirect:", err);
+                }
+            }
+        });
+        return () => unsubscribe();
+    }, [navigate]);
+
     return (
         <div className="landing-page">
             {/* Hero Section */}

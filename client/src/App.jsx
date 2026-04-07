@@ -13,18 +13,19 @@ import LearnMore from './pages/LearnMore';
 function App() {
   return (
     <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Landingpage />} />
-          <Route path="/learn-more" element={<LearnMore />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/role-selection" element={<RoleSelection />} />
-          <Route path="/driver-dashboard" element={<DriverDashboard />} />
-          <Route path="/control-room" element={<ControlRoomDashboard />} />
-          <Route path="/hospital-dashboard" element={<HospitalDashboard />} />
-        </Routes>
-      </Layout>
+      <Routes>
+        {/* Routes with Layout */}
+        <Route path="/" element={<Layout><Landingpage /></Layout>} />
+        <Route path="/learn-more" element={<Layout><LearnMore /></Layout>} />
+        <Route path="/login" element={<Layout><Login /></Layout>} />
+        <Route path="/signup" element={<Layout><Signup /></Layout>} />
+        <Route path="/role-selection" element={<Layout><RoleSelection /></Layout>} />
+        <Route path="/control-room" element={<Layout><ControlRoomDashboard /></Layout>} />
+        <Route path="/hospital-dashboard" element={<Layout><HospitalDashboard /></Layout>} />
+        
+        {/* Routes without Layout */}
+        <Route path="/driver-dashboard" element={<DriverDashboard />} />
+      </Routes>
     </Router>
   );
 }
