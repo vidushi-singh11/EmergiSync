@@ -19,7 +19,13 @@ const Login = () => {
 
             if (userDoc.exists() && userDoc.data().role) {
                 const role = userDoc.data().role;
-                if (role === 'ambulance') navigate('/driver-dashboard');
+                if (role === 'ambulance') {
+                    if (userDoc.data().assignedAmbulance) {
+                        navigate('/driver-dashboard');
+                    } else {
+                        navigate('/ambulance-setup');
+                    }
+                }
                 else if (role === 'controlRoom') navigate('/control-room');
                 else if (role === 'hospital') navigate('/hospital-dashboard');
                 else navigate('/role-selection');

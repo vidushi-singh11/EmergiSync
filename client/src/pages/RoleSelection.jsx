@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth, db } from '../firebase';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { Truck, Monitor, PlusSquare } from 'lucide-react';
 
 const RoleSelection = () => {
@@ -21,7 +21,25 @@ const RoleSelection = () => {
         try {
             const userDocRef = doc(db, 'users', auth.currentUser.uid);
             await setDoc(userDocRef, { role: role }, { merge: true });
-            navigate(path);
+            
+            // Check if ambulance role needs setup
+            if (role === 'ambulance') {
+                const docSnap = await getDoc(userDocRef);
+                if (docSnap.exists() && docSnap.data().assignedAmbulance) {
+                    navigate('/driver-dashboard');
+                } else {
+                    navigate('/ambulance-setup');
+                }
+            } else if (role === 'hospital') {
+                const docSnap = await getDoc(userDocRef);
+                if (docSnap.exists() && docSnap.data().assignedHospital) {
+                    navigate('/hospital-dashboard');
+                } else {
+                    navigate('/hospital-setup');
+                }
+            } else {
+                navigate(path);
+            }
         } catch (err) {
             console.error(err);
             setError("Failed to assign role. Please try again.");

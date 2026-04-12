@@ -9,6 +9,8 @@ import DriverDashboard from './pages/DriverDashboard';
 import ControlRoomDashboard from './pages/ControlRoomDashboard';
 import HospitalDashboard from './pages/HospitalDashboard';
 import LearnMore from './pages/LearnMore';
+import AmbulanceSetup from './pages/AmbulanceSetup';
+import HospitalSetup from './pages/HospitalSetup';
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
         
         {/* Routes without Layout */}
         <Route path="/driver-dashboard" element={<DriverDashboard />} />
+        <Route path="/ambulance-setup" element={<AmbulanceSetup />} />
+        <Route path="/hospital-setup" element={<HospitalSetup />} />
       </Routes>
     </Router>
   );
